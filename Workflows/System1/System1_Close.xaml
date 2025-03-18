@@ -102,7 +102,7 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message Workflow Start" sap:VirtualizedContainerService.HintSize="486,173" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;ℹ️ Closing System1 application.&quot;]" />
-    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Always" ContinueOnError="True" DisplayName="Dashboard" HealingAgentBehavior="Job" sap:VirtualizedContainerService.HintSize="486,987" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" OpenMode="IfNotOpen" ScopeGuid="29a16918-0585-48ab-a976-b4b556443d70" Timeout="2" Version="V2">
+    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Always" ContinueOnError="True" DisplayName="Dashboard" HealingAgentBehavior="Job" sap:VirtualizedContainerService.HintSize="486,987" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" OpenMode="Always" ScopeGuid="29a16918-0585-48ab-a976-b4b556443d70" Timeout="2" Version="V2">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>

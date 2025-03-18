@@ -2,8 +2,7 @@
   <x:Members>
     <x:Property Name="in_Type" Type="InArgument(x:String)" />
     <x:Property Name="in_Status" Type="InArgument(x:String)" />
-    <x:Property Name="in_DataTable" Type="InArgument(sd:DataTable)" />
-    <x:Property Name="out_FilteredDataTable" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="io_FilteredDataTable" Type="InOutArgument(sd:DataTable)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -99,7 +98,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:FilterDataTable DataTable="[in_DataTable]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="416,193" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[out_FilteredDataTable]" SelectColumnsMode="Remove">
+    <ui:FilterDataTable DataTable="[io_FilteredDataTable]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="416,193" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[io_FilteredDataTable]" SelectColumnsMode="Remove">
       <ui:FilterDataTable.Filters>
         <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
           <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
@@ -134,20 +133,12 @@
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:InvokeCode ContinueOnError="{x:Null}" Code="If in_DataTable.AsEnumerable().&#xD;&#xA;   Where(Function(row) row(&quot;Type&quot;).ToString.Trim = Type AndAlso &#xD;&#xA;                     row(&quot;Status&quot;).ToString.Trim = Status).&#xD;&#xA;   Any() Then&#xD;&#xA;   &#xD;&#xA;   out_FilteredDataTable = in_DataTable.AsEnumerable().&#xD;&#xA;                          Where(Function(row) row(&quot;Type&quot;).ToString.Trim = Type AndAlso &#xD;&#xA;                                            row(&quot;Status&quot;).ToString.Trim = Status).&#xD;&#xA;                          CopyToDataTable()&#xD;&#xA;Else&#xD;&#xA;   out_FilteredDataTable = in_DataTable.Clone()&#xD;&#xA;End If" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="416,188" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+          <ui:InvokeCode ContinueOnError="{x:Null}" Code="If in_DataTable.AsEnumerable().&#xA;   Where(Function(row) row(&quot;Type&quot;).ToString.Trim = Type AndAlso &#xA;                     row(&quot;Status&quot;).ToString.Trim = Status).&#xA;   Any() Then&#xA;   &#xA;   out_FilteredDataTable = in_DataTable.AsEnumerable().&#xA;                          Where(Function(row) row(&quot;Type&quot;).ToString.Trim = Type AndAlso &#xA;                                            row(&quot;Status&quot;).ToString.Trim = Status).&#xA;                          CopyToDataTable()&#xA;Else&#xA;   out_FilteredDataTable = in_DataTable.Clone()&#xA;End If" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="416,188" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
             <ui:InvokeCode.Arguments>
-              <InArgument x:TypeArguments="x:String" x:Key="Type">
-                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Type" />
-              </InArgument>
-              <InArgument x:TypeArguments="x:String" x:Key="Status">
-                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Status" />
-              </InArgument>
-              <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_FilteredDataTable">
-                <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="out_FilteredDataTable" />
-              </OutArgument>
-              <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DataTable">
-                <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="in_DataTable" />
-              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="Type">[in_Type]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="Status">[in_Status]</InArgument>
+              <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_FilteredDataTable">[io_FilteredDataTable]</OutArgument>
+              <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DataTable">[in_DataTable]</InArgument>
             </ui:InvokeCode.Arguments>
           </ui:InvokeCode>
         </Sequence>

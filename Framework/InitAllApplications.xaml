@@ -93,7 +93,7 @@
     <ui:LogMessage DisplayName="Log message (Initialize applications)" sap:VirtualizedContainerService.HintSize="416,173" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;ℹ️ Opening applications...&quot;]" />
     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="System1_Login - Invoke Workflow File (Workflows\System1\System1_Login.xaml)" sap:VirtualizedContainerService.HintSize="416,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Workflows\System1\System1_Login.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="in_OrchestratorFolder">[in_Config("OrchestratorFolder").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_OrchestratorFolder">[in_Config("OrchestratorQueueFolder").ToString]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_System1Credential">[in_Config("System1Credential").ToString]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_System1URL">[in_Config("System1URL").ToString]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_To">[in_Config("ExceptionEmail").ToString]</InArgument>
