@@ -4,8 +4,12 @@
   "description": "Dispatcher process to identify and queue WI4 Work Items for yearly report generation",
   "main": "Main.xaml",
   "dependencies": {
+    "ACMESystem1.Descriptors": "[1.0.1]",
+    "UiPath.Credentials.Activities": "[2.1.0]",
     "UiPath.Excel.Activities": "[2.25.1-preview]",
-    "UiPath.System.Activities": "[25.2.1]",
+    "UiPath.GSuite.Activities": "[3.0.10]",
+    "UiPath.Mail.Activities": "[2.0.10]",
+    "UiPath.System.Activities": "[25.2.2]",
     "UiPath.Testing.Activities": "[24.10.4]",
     "UiPath.UIAutomation.Activities": "[25.2.1-preview]"
   },
