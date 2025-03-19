@@ -117,34 +117,43 @@ sequenceDiagram
     participant Orch as Orchestrator
 
     Note over Robot,Orch: INITIALIZE
-
     Robot->>Orch: Get Credentials
     Orch-->>Robot: Return Credentials
     Robot->>ACME: Open Browser & Login
     ACME-->>Robot: Dashboard Loaded
 
-    Note over Robot,Orch: GET TRANSACTION DATA
+    loop Until No More Pages
+        Note over Robot,Orch: GET TRANSACTION DATA
+        Robot->>ACME: Check If Page N Exists
+        ACME-->>Robot: Page Exists Status
 
-    Robot->>ACME: Navigate to Work Items
-    ACME-->>Robot: Work Items Page
-    Robot->>ACME: Extract Work Items Table
-    ACME-->>Robot: Work Items Data
-    Robot->>Robot: Filter WI4 Items with Open Status
-
-    loop For Each Page
-        Note over Robot,Orch: PROCESS TRANSACTION
-
-        loop For Each WI4 Item
-            Robot->>Orch: Add Item to Queue
-            Orch-->>Robot: Item Added Confirmation
+        alt Page Exists
+            Robot->>Robot: Set TransactionItem = TransactionNumber
+        else Page Does Not Exist
+            Robot->>Robot: Set TransactionItem = 0 (End Process)
         end
 
-        Robot->>ACME: Navigate to Next Page
-        ACME-->>Robot: Next Page Loaded
+        alt TransactionItem > 0
+            Note over Robot,Orch: PROCESS TRANSACTION
+            Robot->>ACME: Navigate to Work Items (Page N)
+            ACME-->>Robot: Work Items Page
+            Robot->>ACME: Extract Work Items Table
+            ACME-->>Robot: Work Items Data
+            Robot->>Robot: Filter for WI4 Items with Open Status
+
+            alt WI4 Items Found
+                loop For Each WI4 Item
+                    Robot->>Orch: Add Item to Queue
+                    Orch-->>Robot: Item Added Confirmation
+                    Robot->>Robot: Log Queue Addition
+                end
+            end
+
+            Robot->>Robot: Increment TransactionNumber
+        end
     end
 
     Note over Robot,Orch: END PROCESS
-
     Robot->>ACME: Logout
     Robot->>ACME: Close Browser
 ```
